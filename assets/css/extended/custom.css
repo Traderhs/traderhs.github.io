@@ -1,6 +1,6 @@
 /* Global Font */
 :root {
-    --font-family: 'Inter', 'Pretendard', 'Noto Sans KR', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans KR', sans-serif;
+    --font-family: 'Inter', 'Pretendard', 'Noto Sans KR', serif;
     --gap: 24px;
     --content-gap: 20px;
     --nav-width: 1024px;
@@ -15,7 +15,7 @@
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: var(--font-family), serif;
     background-color: #f8f9fa;
     color: #212529;
     transition: background-color 0.3s, color 0.3s;
@@ -105,14 +105,20 @@ body {
 }
 
 @keyframes gradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 .profile img {
     border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -127,18 +133,18 @@ body {
     padding: 10px 24px;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .buttons .button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
     background: var(--secondary);
 }
 
 /* Social Icons */
 .social-icons a {
-    background: rgba(0,0,0,0.05);
+    background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -150,7 +156,7 @@ body {
 }
 
 .dark .social-icons a {
-    background: rgba(255,255,255,0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .social-icons a:hover {
@@ -180,4 +186,225 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary);
+}
+
+/* --- IDE Layout (sidebar + main) --- */
+.ide-layout {
+    width: 100%;
+    max-width: var(--nav-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+    padding: 0 var(--gap);
+}
+
+.ide-main {
+    width: 100%;
+    max-width: none; /* let grid manage it */
+}
+
+@media (max-width: 1024px) {
+    .ide-layout {
+        grid-template-columns: 1fr;
+        padding: 0 16px;
+    }
+
+    .ide-sidebar {
+        position: static !important;
+        top: auto !important;
+    }
+}
+
+.ide-sidebar {
+    position: sticky;
+    top: calc(var(--header-height, 60px) + 14px);
+}
+
+.ide-sidebar__inner {
+    display: grid;
+    gap: 14px;
+}
+
+.ide-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px 14px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.dark .ide-card {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.ide-card__title {
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.ide-profile__title a {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.ide-profile__headline {
+    margin-top: 6px;
+    font-weight: 700;
+}
+
+.ide-profile__desc {
+    margin-top: 6px;
+    color: var(--secondary);
+    font-size: 14px;
+    line-height: 1.55;
+}
+
+.ide-quick {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ide-quick__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(148, 163, 184, 0.10);
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.dark .ide-quick__item {
+    background: rgba(148, 163, 184, 0.08);
+}
+
+.ide-quick__item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.10);
+}
+
+.ide-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.ide-kpi {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px 10px;
+    background: rgba(99, 102, 241, 0.06);
+}
+
+.dark .ide-kpi {
+    background: rgba(99, 102, 241, 0.10);
+}
+
+.ide-kpi__label {
+    font-size: 12px;
+    color: var(--secondary);
+}
+
+.ide-kpi__value {
+    margin-top: 6px;
+    font-size: 20px;
+    font-weight: 900;
+    letter-spacing: -0.02em;
+}
+
+.ide-kpi__hint {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--secondary);
+}
+
+.ide-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 6px;
+}
+
+.ide-list__item a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--primary);
+    background: rgba(148, 163, 184, 0.06);
+}
+
+.dark .ide-list__item a {
+    background: rgba(148, 163, 184, 0.04);
+}
+
+.ide-list__item a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+}
+
+.ide-list__name {
+    font-weight: 700;
+}
+
+.ide-list__count {
+    font-size: 12px;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    background: var(--theme);
+    border-radius: 999px;
+    padding: 2px 8px;
+}
+
+.ide-tagcloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.ide-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(34, 197, 94, 0.08);
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 12px;
+}
+
+.dark .ide-tag {
+    background: rgba(34, 197, 94, 0.12);
+}
+
+.ide-tag:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+}
+
+.ide-empty {
+    color: var(--secondary);
+    font-size: 13px;
+    line-height: 1.5;
 }

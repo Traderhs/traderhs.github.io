@@ -1,0 +1,9 @@
+{{- /* Footer custom content area */ -}}
+{{- /* Load visitor counter script (sidebar) */ -}}
+{{- $vc := resources.Get "js/visitor-counter.js" -}}
+{{- if $vc -}}
+  {{- $vc = $vc | minify | fingerprint -}}
+  <script defer src="{{ $vc.RelPermalink }}" integrity="{{ $vc.Data.Integrity }}"></script>
+{{- else -}}
+  <script defer src="{{ "js/visitor-counter.js" | relURL }}"></script>
+{{- end -}}

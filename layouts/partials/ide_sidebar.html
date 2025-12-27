@@ -1,0 +1,72 @@
+<aside class="ide-sidebar" aria-label="Site sidebar">
+  <div class="ide-sidebar__inner">
+    <div class="ide-card ide-card--profile">
+      <div class="ide-profile">
+        <div class="ide-profile__title">
+          <a href="{{ "" | absLangURL }}">{{ site.Title }}</a>
+        </div>
+        {{- with site.Params.homeInfoParams }}
+          {{- with .Title }}<div class="ide-profile__headline">{{ . | markdownify }}</div>{{- end }}
+          {{- with .Content }}<div class="ide-profile__desc">{{ . | markdownify }}</div>{{- end }}
+        {{- end }}
+      </div>
+    </div>
+
+    <div class="ide-card ide-card--search">
+      <div class="ide-card__title">Quick</div>
+      <div class="ide-quick">
+        <a class="ide-quick__item" href="{{ "/search/" | relLangURL }}">Search</a>
+        <a class="ide-quick__item" href="{{ "/archives/" | relLangURL }}">Archives</a>
+        <a class="ide-quick__item" href="{{ "/tags/" | relLangURL }}">Tags</a>
+      </div>
+    </div>
+
+    <div class="ide-card ide-card--visitor" id="visitor-counter">
+      <div class="ide-card__title">Visitors</div>
+      <div class="ide-kpi-grid">
+        <div class="ide-kpi">
+          <div class="ide-kpi__label">Today</div>
+          <div class="ide-kpi__value" data-key="today">-</div>
+        </div>
+        <div class="ide-kpi">
+          <div class="ide-kpi__label">Total</div>
+          <div class="ide-kpi__value" data-key="total">-</div>
+        </div>
+      </div>
+      <div class="ide-kpi__hint">방문자 통계는 제거되었습니다.</div>
+    </div>
+
+    <div class="ide-card ide-card--categories">
+      <div class="ide-card__title">Categories</div>
+      {{- $cats := site.Taxonomies.categories -}}
+      {{- if $cats }}
+        <ul class="ide-list">
+          {{- range $name, $taxonomy := $cats }}
+            <li class="ide-list__item">
+              <a href="{{ (printf "/categories/%s/" $name) | urlize | relLangURL }}">
+                <span class="ide-list__name">{{ $name }}</span>
+                <span class="ide-list__count">{{ len $taxonomy.Pages }}</span>
+              </a>
+            </li>
+          {{- end }}
+        </ul>
+      {{- else }}
+        <div class="ide-empty">카테고리가 아직 없어요. 글 Front Matter에 <code>categories</code>를 추가해보세요.</div>
+      {{- end }}
+    </div>
+
+    <div class="ide-card ide-card--tags">
+      <div class="ide-card__title">Tags</div>
+      {{- $tags := site.Taxonomies.tags -}}
+      {{- if $tags }}
+        <div class="ide-tagcloud">
+          {{- range $name, $taxonomy := $tags }}
+            <a class="ide-tag" href="{{ (printf "/tags/%s/" $name) | urlize | relLangURL }}">#{{ $name }}</a>
+          {{- end }}
+        </div>
+      {{- else }}
+        <div class="ide-empty">태그가 아직 없어요. 글 Front Matter에 <code>tags</code>를 추가해보세요.</div>
+      {{- end }}
+    </div>
+  </div>
+</aside>
